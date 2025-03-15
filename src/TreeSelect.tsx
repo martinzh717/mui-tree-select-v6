@@ -32,6 +32,8 @@ import useTreeSelect, {
   FreeSoloNode,
 } from "./useTreeSelect";
 
+import {AutocompleteFreeSoloValueMapping} from "@mui/material/useAutocomplete";
+
 // Cloned from Autocomplete for loading and noOptions components
 // https://github.com/mui/material-ui/blob/b3645b3fd11dc26a06ea370a41b5bac1026c6792/packages/mui-material/src/Autocomplete/Autocomplete.js#L27
 const useUtilityClasses = (classes?: Record<string, string>) => {
@@ -248,7 +250,7 @@ const defaultGetOptionKey: NonNullable<
     true | false,
     true | false
   >["getOptionKey"]
-> = (_, { key }) => key;
+> = (_, state?: {key: string;}) => state?.key ?? '';
 
 export const PathIcon = forwardRef<SVGSVGElement, SvgIconProps>(
   function PathIcon(props: SvgIconProps, ref) {
@@ -317,10 +319,11 @@ export interface TreeSelectProps<
 > extends UseTreeSelectProps<Node, Multiple, DisableClearable, FreeSolo>,
     Omit<
       AutocompleteProps<
-        Node | TreeSelectFreeSoloValueMapping<Node, FreeSolo>,
+      Node | TreeSelectFreeSoloValueMapping<Node, FreeSolo> | AutocompleteFreeSoloValueMapping<FreeSolo>,
         Multiple,
         DisableClearable,
-        FreeSolo
+        FreeSolo,
+        "div"
       >,
       | keyof UseTreeSelectProps<Node, Multiple, DisableClearable, FreeSolo>
       | "loading"
@@ -373,8 +376,8 @@ export interface TreeSelectProps<
    * conflicts.
    */
   getOptionKey?: (
-    option: Node | TreeSelectFreeSoloValueMapping<Node, FreeSolo>,
-    state: {
+    option: Node | TreeSelectFreeSoloValueMapping<Node, FreeSolo> | AutocompleteFreeSoloValueMapping<FreeSolo>,
+    state?: {
       key: string;
     }
   ) => string;
@@ -482,7 +485,7 @@ const _TreeSelect = <
             <AutocompleteNoOptions
               className={classesClone.noOptions}
               role="presentation"
-              onMouseDown={(event) => {
+              onMouseDown={(event: React.MouseEvent) => {
                 // Prevent input blur when interacting with the "no options" content
                 event.preventDefault();
               }}

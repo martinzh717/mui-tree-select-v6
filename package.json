@@ -1,6 +1,6 @@
 {
-  "name": "mui-tree-select",
-  "version": "1.0.0-beta.11",
+  "name": "mui-tree-select-v6",
+  "version": "2.0.0-beta.01",
   "description": "Material-UI auto select component for tree data structures.",
   "keywords": [
     "material",
@@ -32,8 +32,8 @@
   "devDependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.6.0",
-    "@mui/material": "^5.6.0",
+    "@mui/icons-material": "^6.0.0",
+    "@mui/material": "^6.0.0",
     "@types/node": "^17.0.22",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
@@ -65,7 +65,7 @@
     "webpack-dev-server": "^4.3.0"
   },
   "peerDependencies": {
-    "@mui/icons-material": "^5.0.0",
-    "@mui/material": "^5.0.0"
+    "@mui/icons-material": "^6.0.0",
+    "@mui/material": "^6.0.0"
   }
 }
